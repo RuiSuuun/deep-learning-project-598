@@ -10,7 +10,7 @@ from sklearn.preprocessing import OneHotEncoder
 import pickle
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
 import tensorflow as tf
-from cnn_8class import CNN8class
+from code_base.cnn_8class import CNN8class
 from data import DataSet
 
 with open('split_hf.pickle', 'rb') as f:
