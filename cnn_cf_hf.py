@@ -6,14 +6,12 @@ from sklearn.neighbors import NearestNeighbors
 from sklearn.cluster import KMeans
 import numpy as np
 from sklearn import metrics
-from sklearn.linear_model.logistic import LogisticRegression
-from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 from sklearn.preprocessing import OneHotEncoder
 import pickle
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
 import tensorflow as tf
 from cnn_8class import CNN8class
-from data.read_data import DataSet
+from data import DataSet
 
 with open('split_hf.pickle', 'rb') as f:
     sssList = pickle.load(f)
