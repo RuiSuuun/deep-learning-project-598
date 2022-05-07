@@ -13,21 +13,12 @@ class Model(nn.Module):
         self.dropout = nn.Dropout(p=0.2)
 
     def forward(self, x):
-        print(x.shape)
         x = torch.reshape(x, (-1, x.shape[1], 1))
-        print(x.shape)
         x = self.conv1(x)
-        print(x.shape)
         x = self.actv1(x)
-        print(x.shape)
         x = self.pool(x)
-        print(x.shape)
         x = torch.reshape(x, (-1, x.shape[1] * x.shape[2]))
-        print(x.shape)
         x = self.linear(x)
-        print(x.shape)
         x = self.actv2(x)
-        print(x.shape)
         x = self.dropout(x)
-        print(x.shape)
         return x
