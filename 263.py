@@ -13,7 +13,7 @@ np.random.seed(seed)
 torch.manual_seed(seed)
 os.environ["PYTHONHASHSEED"] = str(seed)
 
-treated, control = data_loader.load_data()
+train_dataset, val_dataset = data_loader.load_data()
 model = Model()
 
 # optimizer
@@ -39,7 +39,7 @@ def test(loader):
     return correct / len(loader.dataset)
 
 for epoch in range(200):
-    train(treated)
-    train_acc = test(treated)
-    test_acc = test(control)
+    train(train_dataset)
+    train_acc = test(train_dataset)
+    test_acc = test(val_dataset)
     print(f'Epoch: {epoch + 1:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}')
