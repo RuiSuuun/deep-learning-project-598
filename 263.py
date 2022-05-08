@@ -13,8 +13,8 @@ np.random.seed(seed)
 torch.manual_seed(seed)
 os.environ["PYTHONHASHSEED"] = str(seed)
 
-train_dataset, val_dataset = data_loader.load_data()
-model = Model()
+train_dataset, val_dataset, dataset_overall = data_loader.load_data()
+model = Model(dataset_overall)
 
 # optimizer
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)

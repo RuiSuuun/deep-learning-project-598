@@ -42,5 +42,6 @@ def load_data():
 
     train_dataset = torch.utils.data.DataLoader(train_dataset, batch_size=128, collate_fn=collate_fn)
     val_dataset = torch.utils.data.DataLoader(val_dataset, batch_size=128, collate_fn=collate_fn)
+    dataset = torch.utils.data.DataLoader(dataset, batch_size=128, collate_fn=collate_fn)
 
-    return train_dataset, val_dataset
+    return train_dataset, val_dataset, dataset
