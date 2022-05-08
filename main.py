@@ -35,12 +35,26 @@ def test(loader):
     model.eval()
     correct = 0
     for data in loader:
-        output = model(data.x)
-        correct += int((output == data.y).sum())  # Check against ground-truth labels.
-    return correct / len(loader.dataset)
+        input_data = generate_random_coefficient_vector() * data.x
+        output_data = model(input_data)
+        correct += int((output_data == data.y).sum())  # Check against ground-truth labels.
 
-for epoch in range(200):
+        pehe = torch.pow(PEHE(output_data, data.y), 0.5)
+        ate = ATE(output_data, data.y)
+    return correct / len(loader.dataset), pehe, ate
+
+def generate_random_coefficient_vector():
+    return np.random.choice(np.arange(0, 5), p=[0.5, 0.2, 0.15, 0.1, 0.05])
+
+def PEHE(prediction, actual):
+    return torch.mean(torch.pow(prediction - actual, 2))
+
+def ATE(prediction, actual):
+    return torch.mean(torch.abs(prediction - actual))
+
+for epoch in range(1000):
     train(train_dataset)
-    train_acc = test(train_dataset)
-    test_acc = test(val_dataset)
+    train_acc, _, _ = test(train_dataset)
+    test_acc, pehe, ate = test(val_dataset)
     print(f'Epoch: {epoch + 1:03d}, Train Acc: {train_acc:.4f}, Test Acc: {test_acc:.4f}')
+    print(f'Epoch: {epoch + 1:03d}, PEHE: {pehe:.2f}, ATE: {ate:.2f}')
