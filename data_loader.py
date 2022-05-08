@@ -12,7 +12,7 @@ class CustomDataset(Dataset):
         return len(self.x)
 
     def __getitem__(self, index):
-        return self.x[index], self.y[index]
+        return self.x.iloc[index], self.y.iloc[index]
 
 def load_data():
     def collate_fn(data):
@@ -42,6 +42,5 @@ def load_data():
 
     train_dataset = torch.utils.data.DataLoader(train_dataset, batch_size=128, collate_fn=collate_fn)
     val_dataset = torch.utils.data.DataLoader(val_dataset, batch_size=128, collate_fn=collate_fn)
-    dataset = torch.utils.data.DataLoader(dataset, batch_size=128, collate_fn=collate_fn)
 
     return train_dataset, val_dataset, dataset

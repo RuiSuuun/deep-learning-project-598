@@ -14,11 +14,12 @@ def distance_matrix(x, y):
 
 
 class KNN(nn.Module):
-    def __init__(self, X = None, Y = None, k = 2):
+    def __init__(self, X=None, Y=None, k=2):
+        super(KNN, self).__init__()
         self.k = k
         self.train(X, Y)
 
-    def train(self, X, Y):
+    def train(self, X=None, Y=None):
         self.train_pts = X
         self.train_label = Y
         if type(Y) != type(None):
